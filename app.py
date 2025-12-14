@@ -5,9 +5,9 @@ from PIL import Image
 import os
 import requests
 
-# ===============================
-# 1. Download model from Hugging Face if not exists
-# ===============================
+
+# Download model from Hugging Face if not exists
+
 MODEL_FILENAME = "pneumonia_model.h5"
 HF_URL = "https://huggingface.co/jahangi/Pneumonia_Detection_System/resolve/main/pneumonia_model.h5"
 
@@ -18,14 +18,14 @@ if not os.path.exists(MODEL_FILENAME):
         f.write(r.content)
     st.success("Model downloaded successfully!")
 
-# ===============================
-# 2. Load Model
-# ===============================
+
+# Load Model
+
 model = tf.keras.models.load_model(MODEL_FILENAME)
 
-# ===============================
-# 3. Streamlit UI
-# ===============================
+
+# Streamlit UI
+
 st.title("Pneumonia Detection System (AI Powered)")
 
 uploaded_file = st.file_uploader(
@@ -50,3 +50,4 @@ if uploaded_file is not None:
             st.error(f"Pneumonia Detected | Confidence: {prediction*100:.2f}%")
         else:
             st.success(f"Normal Lungs | Confidence: {(1-prediction)*100:.2f}%")
+
